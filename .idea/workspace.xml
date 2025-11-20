@@ -4,14 +4,27 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e04cc721-68d6-4560-a5ce-87071bc9a261" name="Changes" comment="" />
+    <list default="true" id="e04cc721-68d6-4560-a5ce-87071bc9a261" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/packages/types/.eslintrc.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/types/src/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/types/tsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.yarn/install-state.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="ChangesViewManager">
+    <option name="groupingKeys">
+      <option value="directory" />
+    </option>
+  </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/apps/mflow-backend" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="ROOT_SYNC" value="DONT_SYNC" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -22,7 +35,7 @@
 }</component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/EpsilonEpsilon/MoneyFlow.git&quot;,
+    &quot;url&quot;: &quot;https://github.com/EpsilonEpsilon/mflow.git&quot;,
     &quot;accountId&quot;: &quot;2af6c3d2-57cb-4391-a2c5-b7d3cd6132e6&quot;
   }
 }</component>
@@ -34,26 +47,33 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "<unknown>",
-    "last_opened_file_path": "/Users/epsilon/Desktop/Projects/PetProjects/MoneyFlow",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "npm.shared > build.executor": "Run",
-    "prettierjs.PrettierConfiguration.Package": "/Users/epsilon/Desktop/Projects/PetProjects/MoneyFlow/node_modules/prettier",
-    "settings.editor.selected.configurable": "settings.javascript.prettier",
-    "ts.external.directory.path": "/Users/epsilon/Desktop/Projects/PetProjects/MoneyFlow/node_modules/typescript/lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/epsilon/Desktop/Projects/PetProjects/MoneyFlow&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;npm.shared &gt; build.executor&quot;: &quot;Run&quot;,
+    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;/Users/epsilon/Desktop/Projects/PetProjects/MoneyFlow/node_modules/prettier&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.ChangelistConflict&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Users/epsilon/Desktop/Projects/PetProjects/MoneyFlow/node_modules/typescript/lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/packages/shared/src" />
+      <recent name="$PROJECT_DIR$/apps/mflow-backend/src/modules/auth" />
+      <recent name="$PROJECT_DIR$/apps/mflow-backend/src/common" />
+      <recent name="$PROJECT_DIR$/apps/mflow-backend/src/modules/users/entitites" />
+      <recent name="$PROJECT_DIR$/apps/mflow-backend/src/modules" />
+      <recent name="$PROJECT_DIR$/apps/mflow-backend/src/decorators" />
     </key>
   </component>
   <component name="RunManager">
@@ -76,7 +96,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-WS-242.24807.6" />
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-WS-242.26775.11" />
       </set>
     </attachedChunks>
   </component>
@@ -97,6 +117,20 @@
       <workItem from="1754748597485" duration="10641000" />
       <workItem from="1754770134475" duration="1040000" />
       <workItem from="1754771187496" duration="258000" />
+      <workItem from="1754771447981" duration="87000" />
+      <workItem from="1754771538368" duration="2899000" />
+      <workItem from="1755351948827" duration="223000" />
+      <workItem from="1755352175819" duration="2351000" />
+      <workItem from="1755366561193" duration="90742000" />
+      <workItem from="1755508783224" duration="5000" />
+      <workItem from="1759946071815" duration="47000" />
+      <workItem from="1763661911924" duration="8603000" />
+      <workItem from="1763670849853" duration="186000" />
+      <workItem from="1763671044691" duration="427000" />
+      <workItem from="1763671483806" duration="332000" />
+      <workItem from="1763671819241" duration="13000" />
+      <workItem from="1763671838270" duration="284000" />
+      <workItem from="1763672152499" duration="156000" />
     </task>
     <servers />
   </component>
@@ -107,6 +141,17 @@
         <option value="$PROJECT_DIR$/packages/shared/src/index.js" />
         <option value="$PROJECT_DIR$/packages/shared/src/utils/utils.js" />
       </list>
+    </option>
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
     </option>
   </component>
 </project>
