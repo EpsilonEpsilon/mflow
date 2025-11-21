@@ -6,7 +6,7 @@
         <entryData>
           <resourceRoots>
             <path value="file://$PROJECT_DIR$/apps" />
-            <path value="file://$PROJECT_DIR$" />
+            <path value="file://$PROJECT_DIR$/packages" />
           </resourceRoots>
         </entryData>
       </entry>
