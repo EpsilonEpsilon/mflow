@@ -7,4 +7,13 @@ export default () => ({
     username: process.env.DATABASE_USERNAME,
     password: process.env.DATABASE_PASSWORD,
   },
+  hashing: {
+    saltRounds: 10,
+  },
+  jwt: {
+    accessToken: {
+      expiresIn: '7d',
+      secret: process.env.JWT_ACCESS_SECRET,
+    },
+  },
 });
