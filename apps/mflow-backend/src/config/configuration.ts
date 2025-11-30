@@ -11,8 +11,12 @@ export default () => ({
     saltRounds: 10,
   },
   jwt: {
-    accessToken: {
+    refresh: {
       expiresIn: '7d',
+      secret: process.env.JWT_REFRESH_SECRET,
+    },
+    access: {
+      expiresIn: '30m',
       secret: process.env.JWT_ACCESS_SECRET,
     },
   },

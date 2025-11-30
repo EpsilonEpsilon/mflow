@@ -1,8 +1,11 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
-import UsersService from '../users/users.service';
+import UsersService from '../../common/users/users.service';
 import { NewUserDto } from './dto/new-user.dto';
 import EncryptionService from '../../common/encryption/encryption.service';
-import RefreshTokenService from '../../common/refresh-token/refresh-token.service';
+import TokenService from '../../common/token/token.service';
+import { LoginDto } from './dto/login.dto';
+import { User } from '../../common/users/entitites/user.entitity';
+import { DataSource, EntityManager } from 'typeorm';
 
 @Injectable()
 class AuthService {
@@ -10,23 +13,70 @@ class AuthService {
     private readonly userService: UsersService,
 
     private readonly encryptionService: EncryptionService,
-    private refreshTokenService: RefreshTokenService,
+    private tokenService: TokenService,
+    private dataSource: DataSource,
   ) {}
 
+  private async createAuthTokens(
+    data: {
+      user: User;
+      ip?: string;
+      userAgent?: string;
+    },
+    manager?: EntityManager,
+  ) {
+    const refreshToken = await this.tokenService.createRefreshToken(
+      {
+        sub: data.user.id,
+        ip: data.ip,
+        userAgent: data.userAgent,
+        username: data.user.username,
+      },
+      data.user,
+      manager,
+    );
+    const accessToken = await this.tokenService.createAccessToken({
+      sub: data.user.id,
+      username: data.user.username,
+    });
+
+    return { refreshToken, accessToken };
+  }
+
   public async registration(data: NewUserDto, ip?: string, userAgent?: string) {
+    const queryRunner = this.dataSource.createQueryRunner();
+    await queryRunner.connect();
+    await queryRunner.startTransaction();
+
+    try {
+      const user = await this.userService.findOneByUsername(data.username);
+      if (user) throw new BadRequestException('Username is taken');
+      const hashedPassword = await this.encryptionService.hash(data.password);
+      const userRecord = await this.userService.createNewUser(
+        {
+          username: data.username,
+          hashPassword: hashedPassword,
+        },
+        queryRunner.manager,
+      );
+      return this.createAuthTokens({ user: userRecord, ip, userAgent });
+    } catch (e) {
+      await queryRunner.rollbackTransaction();
+      throw e;
+    } finally {
+      await queryRunner.release();
+    }
+  }
+
+  public async login(data: LoginDto, ip?: string, userAgent?: string) {
     const user = await this.userService.findOneByUsername(data.username);
-    if (user) throw new BadRequestException('Username is taken');
-    const hashedPassword = await this.encryptionService.hash(data.password);
-    const userRecord = await this.userService.createNewUser({
-      username: data.username,
-      password: hashedPassword,
-    });
-    return await this.refreshTokenService.create({
-      sub: userRecord.id,
-      ip: ip,
-      userAgent: userAgent,
-      username: userRecord.username,
-    });
+    if (!user) throw new BadRequestException('User is not exist');
+    const isPasswordsEqual = await this.encryptionService.compare(
+      data.password,
+      user.hashPassword,
+    );
+    if (!isPasswordsEqual) throw new BadRequestException('User is not exist');
+    return this.createAuthTokens({ user, ip, userAgent });
   }
 }
 

@@ -1,12 +1,12 @@
 import { Module } from '@nestjs/common';
-import UsersModule from '../users/users.module';
+import UsersModule from '../../common/users/users.module';
 import AuthController from './auth.controller';
 import AuthService from './auth.service';
-import RefreshTokenModule from '../../common/refresh-token/refresh-token.module';
+import TokenModule from '../../common/token/token.module';
 import EncryptionModule from '../../common/encryption/encryption.module';
 
 @Module({
-  imports: [UsersModule, RefreshTokenModule, EncryptionModule],
+  imports: [UsersModule, TokenModule, EncryptionModule],
   providers: [AuthService],
   controllers: [AuthController],
 })

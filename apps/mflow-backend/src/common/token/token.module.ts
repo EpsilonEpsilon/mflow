@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
-import RefreshTokenService from './refresh-token.service';
+import TokenService from './token.service';
 import { JwtModule } from '@nestjs/jwt';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { RefreshToken } from './entitites/refresh-token.enetity';
 import EncryptionModule from '../encryption/encryption.module';
-import UsersModule from '../../modules/users/users.module';
+import UsersModule from '../users/users.module';
 
 @Module({
   imports: [
@@ -13,9 +13,9 @@ import UsersModule from '../../modules/users/users.module';
     JwtModule,
     EncryptionModule,
   ],
-  providers: [RefreshTokenService],
-  exports: [RefreshTokenService],
+  providers: [TokenService],
+  exports: [TokenService],
 })
-class RefreshTokenModule {}
+class TokenModule {}
 
-export default RefreshTokenModule;
+export default TokenModule;
