@@ -7,7 +7,7 @@ This Turborepo starter is maintained by the Turborepo core team.
 Run the following command:
 
 ```sh
-npx createRefreshToken-turbo@latest
+npx create-turbo@latest
 ```
 
 ## What's inside?
