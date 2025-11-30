@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { EntityManager, Repository } from 'typeorm';
 import { RefreshToken } from './entitites/refresh-token.enetity';
 import { AccessTokenPayload, RefreshTokenPayload, TokenObject } from './types';
@@ -68,6 +68,21 @@ class TokenService {
     });
 
     return { token, expiresIn: addMilliseconds(new Date(), ms(expireIn)) };
+  }
+
+  public async verifyAccessToken(token: string): Promise<AccessTokenPayload> {
+    try {
+      const payload = await this.jwtService.verifyAsync<AccessTokenPayload>(
+        token,
+        {
+          secret: this.configService.get<string>('jwt.access.secret'),
+        },
+      );
+
+      return payload;
+    } catch {
+      throw new UnauthorizedException();
+    }
   }
 }
 

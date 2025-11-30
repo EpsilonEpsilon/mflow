@@ -5,6 +5,7 @@ import type { Request, Response } from 'express';
 import { ConfigService } from '@nestjs/config';
 import { LoginDto } from './dto/login.dto';
 import { AuthLoginResponse, AuthRegistrationResponse } from '@repo/types';
+import { Public } from '../../common/decorators/public.decorator';
 
 @Controller('auth')
 class AuthController {
@@ -13,6 +14,7 @@ class AuthController {
     private configService: ConfigService,
   ) {}
 
+  @Public()
   @Post('/login')
   public async signIn(
     @Body() body: LoginDto,
@@ -38,6 +40,7 @@ class AuthController {
     return null;
   }
 
+  @Public()
   @Post('/registration')
   public async registration(
     @Body() body: NewUserDto,
