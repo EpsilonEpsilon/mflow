@@ -1,10 +1,13 @@
 import { Body, Controller, Ip, Post, Req, Res } from '@nestjs/common';
-import { NewUserDto } from './dto/new-user.dto';
 import AuthService from './auth.service';
 import type { Request, Response } from 'express';
 import { ConfigService } from '@nestjs/config';
-import { LoginDto } from './dto/login.dto';
-import { AuthLoginResponse, AuthRegistrationResponse } from '@repo/types';
+import {
+  AuthLoginResponse,
+  AuthRegistrationResponse,
+  LoginDto,
+  NewUserDto,
+} from '@repo/types';
 import { Public } from '../../common/decorators/public.decorator';
 
 @Controller('auth')

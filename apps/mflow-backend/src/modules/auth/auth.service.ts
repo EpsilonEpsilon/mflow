@@ -1,11 +1,10 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import UsersService from '../../common/users/users.service';
-import { NewUserDto } from './dto/new-user.dto';
 import EncryptionService from '../../common/encryption/encryption.service';
 import TokenService from '../../common/token/token.service';
-import { LoginDto } from './dto/login.dto';
 import { User } from '../../common/users/entitites/user.entitity';
 import { DataSource, EntityManager } from 'typeorm';
+import { LoginDto, NewUserDto } from '@repo/types';
 
 @Injectable()
 class AuthService {
