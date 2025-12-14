@@ -1,0 +1,46 @@
+<div class="login-page">
+  <div class="login-container">
+    <div class="login-gradient">
+      <div class="login-card">
+        <div class="login-header">
+          <div class="login-title">Welcome to your MoneyFlow!</div>
+          <span class="login-subtitle">Sign in to continue</span>
+        </div>
+
+        <form
+          [formGroup]="loginService.loginForm"
+          (ngSubmit)="loginService.onSubmit()"
+          class="login-form"
+        >
+          <label for="email1" class="form-label">Email</label>
+          <input
+            pInputText
+            id="email1"
+            type="text"
+            placeholder="Email address"
+            class="form-input"
+            formControlName="email"
+          />
+          <label for="password1" class="form-label">Password</label>
+          <p-password
+            id="password1"
+            placeholder="Password"
+            [toggleMask]="true"
+            [feedback]="false"
+            class="password-input"
+            [fluid]="true"
+            formControlName="password"
+          ></p-password>
+          <p-button
+            type="submit"
+            class="submit-button"
+            styleClass="w-full"
+            label="Sign In"
+            routerLink="/"
+            [disabled]="this.loginService.loginForm.invalid"
+          ></p-button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

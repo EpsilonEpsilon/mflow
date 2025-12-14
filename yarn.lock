@@ -247,6 +247,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@angular/animations@npm:^21.0.5":
+  version: 21.0.5
+  resolution: "@angular/animations@npm:21.0.5"
+  dependencies:
+    tslib: "npm:^2.3.0"
+  peerDependencies:
+    "@angular/core": 21.0.5
+  checksum: 10c0/e1a316d07e6f136343738259030354c7efd6b14fd79209e940980fbf165c19fcc99c5fbdbd367506335a8326690767d558e37f9494761230ac9a3bda3ef170d7
+  languageName: node
+  linkType: hard
+
 "@angular/build@npm:^20.1.5":
   version: 20.1.5
   resolution: "@angular/build@npm:20.1.5"
@@ -2632,6 +2643,40 @@ __metadata:
   version: 0.2.9
   resolution: "@pkgr/core@npm:0.2.9"
   checksum: 10c0/ac8e4e8138b1a7a4ac6282873aef7389c352f1f8b577b4850778f5182e4a39a5241facbe48361fec817f56d02b51691b383010843fb08b34a8e8ea3614688fd5
+  languageName: node
+  linkType: hard
+
+"@primeuix/styled@npm:^0.7.3, @primeuix/styled@npm:^0.7.4":
+  version: 0.7.4
+  resolution: "@primeuix/styled@npm:0.7.4"
+  dependencies:
+    "@primeuix/utils": "npm:^0.6.1"
+  checksum: 10c0/e1ed3e6c4a36bd5a6722b8fcd3e79d9fd60a36f174e5d822fd2fa0ecace49508c548228462ff8033961e1aa1bece6ec87c04879097c3691044314629120e968c
+  languageName: node
+  linkType: hard
+
+"@primeuix/styles@npm:^1.2.5":
+  version: 1.2.5
+  resolution: "@primeuix/styles@npm:1.2.5"
+  dependencies:
+    "@primeuix/styled": "npm:^0.7.3"
+  checksum: 10c0/49d8f5fca435e095c13bc7004187ee1d741004cf2696ed615e6a72d6732d928c55670f0f98700c3e040058746669d11abc7906f16c9b2f5631635d1260d01212
+  languageName: node
+  linkType: hard
+
+"@primeuix/themes@npm:^2.0.1":
+  version: 2.0.1
+  resolution: "@primeuix/themes@npm:2.0.1"
+  dependencies:
+    "@primeuix/styled": "npm:^0.7.4"
+  checksum: 10c0/7ee77b4718512d21165c92f1fa581d8a1e72ef336de593c2e4ffaf6b7bb6748bd68ba0853682a507037ad36f120f24e05c12de64d64311ad0c90e6b42dae7f2b
+  languageName: node
+  linkType: hard
+
+"@primeuix/utils@npm:^0.6.1, @primeuix/utils@npm:^0.6.2":
+  version: 0.6.3
+  resolution: "@primeuix/utils@npm:0.6.3"
+  checksum: 10c0/d08638b0bea6a0124f1461c9eee54e9ad275cde5a061d85861a5b31970bc3714401dccc44abecec74ae37c971a6d795c36c3818637b54c0d7b46acb7b2c46ed9
   languageName: node
   linkType: hard
 
@@ -9024,6 +9069,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "mflow-frontend@workspace:apps/mflow-frontend"
   dependencies:
+    "@angular/animations": "npm:^21.0.5"
     "@angular/build": "npm:^20.1.5"
     "@angular/cli": "npm:^20.1.5"
     "@angular/common": "npm:^20.1.0"
@@ -9033,6 +9079,7 @@ __metadata:
     "@angular/forms": "npm:^20.1.0"
     "@angular/platform-browser": "npm:^20.1.0"
     "@angular/router": "npm:^20.1.0"
+    "@primeuix/themes": "npm:^2.0.1"
     "@types/jasmine": "npm:~5.1.0"
     jasmine-core: "npm:~5.8.0"
     karma: "npm:~6.4.0"
@@ -9040,6 +9087,7 @@ __metadata:
     karma-coverage: "npm:~2.2.0"
     karma-jasmine: "npm:~5.1.0"
     karma-jasmine-html-reporter: "npm:~2.1.0"
+    primeng: "npm:^20.3.0"
     rxjs: "npm:~7.8.0"
     tslib: "npm:^2.3.0"
     typescript: "npm:~5.8.2"
@@ -10280,6 +10328,27 @@ __metadata:
     ansi-styles: "npm:^5.0.0"
     react-is: "npm:^18.0.0"
   checksum: 10c0/edc5ff89f51916f036c62ed433506b55446ff739358de77207e63e88a28ca2894caac6e73dcb68166a606e51c8087d32d400473e6a9fdd2dbe743f46c9c0276f
+  languageName: node
+  linkType: hard
+
+"primeng@npm:^20.3.0":
+  version: 20.3.0
+  resolution: "primeng@npm:20.3.0"
+  dependencies:
+    "@primeuix/styled": "npm:^0.7.4"
+    "@primeuix/styles": "npm:^1.2.5"
+    "@primeuix/utils": "npm:^0.6.2"
+    tslib: "npm:^2.3.0"
+  peerDependencies:
+    "@angular/animations": ^20.0.4
+    "@angular/cdk": ^20.0.3
+    "@angular/common": ^20.0.4
+    "@angular/core": ^20.0.4
+    "@angular/forms": ^20.0.4
+    "@angular/platform-browser": ^20.0.4
+    "@angular/router": ^20.0.4
+    rxjs: ^6.0.0 || ^7.8.1
+  checksum: 10c0/e9b63282a755f0340760f7e33e8791f88b4202791cf71fd98298cd9c079107cc8a2f441005928e4f747737d2e3a0d7de281073d6922b7ffb3130736b6b17650a
   languageName: node
   linkType: hard
 
