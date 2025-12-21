@@ -13,7 +13,14 @@ class BaseApiService {
   };
 
   protected post<T>(url: string, body: unknown) {
-    return this.http.post(url, body, { headers: this.headers });
+    return this.http.post(this.buildUrl(url), body, {
+      headers: this.headers,
+      withCredentials: true,
+    });
+  }
+
+  private buildUrl(url: string) {
+    return new URL(url, this.config.config.api.url).toString();
   }
 }
 

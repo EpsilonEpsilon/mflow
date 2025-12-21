@@ -26,4 +26,7 @@ export class RefreshToken {
 
   @CreateDateColumn({ nullable: false })
   createdAt: Date;
+
+  @CreateDateColumn({ nullable: false })
+  deviceId: string;
 }

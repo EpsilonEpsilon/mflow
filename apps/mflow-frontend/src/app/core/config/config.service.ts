@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 class ConfigService {
   public config = {
     api: {
-      url: 'https://localhost:3000/api',
+      url: 'http://localhost:3000/api/',
     },
   };
 }

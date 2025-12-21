@@ -1,7 +1,6 @@
 import { Body, Controller, Ip, Post, Req, Res } from '@nestjs/common';
 import AuthService from './auth.service';
-import type { Request, Response } from 'express';
-import { ConfigService } from '@nestjs/config';
+import type { CookieOptions, Request, Response } from 'express';
 import {
   AuthLoginResponse,
   AuthRegistrationResponse,
@@ -12,10 +11,16 @@ import { Public } from '../../common/decorators/public.decorator';
 
 @Controller('auth')
 class AuthController {
-  constructor(
-    private authService: AuthService,
-    private configService: ConfigService,
-  ) {}
+  constructor(private authService: AuthService) {}
+
+  private getCookiesOptions = (expiresIn?: Date): CookieOptions => {
+    return {
+      httpOnly: true,
+      expires: expiresIn,
+      sameSite: 'none',
+      secure: true,
+    };
+  };
 
   @Public()
   @Post('/login')
@@ -32,14 +37,21 @@ class AuthController {
       userAgent,
     );
 
-    res.cookie('refreshToken', refreshToken.token, {
-      httpOnly: true,
-      expires: refreshToken.expiresIn,
-    });
-    res.cookie('accessToken', accessToken.token, {
-      httpOnly: true,
-      expires: accessToken.expiresIn,
-    });
+    res.cookie(
+      'refreshToken',
+      refreshToken.token,
+      this.getCookiesOptions(refreshToken.expiresIn),
+    );
+    res.cookie(
+      'accessToken',
+      accessToken.token,
+      this.getCookiesOptions(accessToken.expiresIn),
+    );
+    res.cookie(
+      'id',
+      refreshToken.deviceId,
+      this.getCookiesOptions(refreshToken.expiresIn),
+    );
     return null;
   }
 
@@ -57,14 +69,18 @@ class AuthController {
       ip,
       userAgent,
     );
-    res.cookie('refreshToken', refreshToken.token, {
-      httpOnly: true,
-      expires: refreshToken.expiresIn,
-    });
-    res.cookie('accessToken', accessToken.token, {
-      httpOnly: true,
-      expires: accessToken.expiresIn,
-    });
+
+    res.cookie(
+      'refreshToken',
+      refreshToken.token,
+      this.getCookiesOptions(refreshToken.expiresIn),
+    );
+    res.cookie(
+      'accessToken',
+      accessToken.token,
+      this.getCookiesOptions(accessToken.expiresIn),
+    );
+    res.cookie('id', refreshToken.deviceId, this.getCookiesOptions());
 
     return null;
   }

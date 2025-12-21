@@ -34,12 +34,15 @@ class AuthService {
       data.user,
       manager,
     );
-    const accessToken = await this.tokenService.createAccessToken({
-      sub: data.user.id,
-      username: data.user.username,
-    });
+    const accessToken = await this.tokenService.createAccessToken(
+      refreshToken.token,
+      {
+        sub: data.user.id,
+        username: data.user.username,
+      },
+    );
 
-    return { refreshToken, accessToken };
+    return { refreshToken, accessToken, deviceId: refreshToken.deviceId };
   }
 
   public async registration(data: NewUserDto, ip?: string, userAgent?: string) {

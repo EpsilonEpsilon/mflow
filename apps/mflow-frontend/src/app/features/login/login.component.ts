@@ -8,12 +8,15 @@ import { PasswordModule } from 'primeng/password';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import LoginService from './login.service';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
+import LoginHttp from './login.http';
 
 @Component({
   selector: 'app-login',
   standalone: true,
   templateUrl: './login.template.html',
-  providers: [LoginService],
+  providers: [LoginService, MessageService, LoginHttp],
   styleUrls: ['./login.scss'],
   imports: [
     ButtonModule,
@@ -24,6 +27,7 @@ import LoginService from './login.service';
     RouterModule,
     RippleModule,
     ReactiveFormsModule,
+    ToastModule,
   ],
 })
 class LoginComponent {

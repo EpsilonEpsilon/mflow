@@ -11,3 +11,7 @@ export interface TokenObject {
   token: string;
   expiresIn: Date;
 }
+
+export interface RefreshTokenObject extends TokenObject {
+  deviceId: string;
+}
