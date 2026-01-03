@@ -8,7 +8,7 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import AuthService from './auth.service';
-import type { CookieOptions, Request, Response } from 'express';
+import type { CookieOptions, Response } from 'express';
 import {
   AuthLoginResponse,
   AuthRegistrationResponse,
@@ -17,6 +17,7 @@ import {
 } from '@repo/types';
 import { Public } from '../../common/decorators/public.decorator';
 import type { CustomRequest } from '../../types/express';
+
 @Controller('auth')
 class AuthController {
   constructor(private authService: AuthService) {}
