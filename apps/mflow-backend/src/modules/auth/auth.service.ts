@@ -129,6 +129,10 @@ class AuthService implements OnModuleInit {
     );
   }
 
+  public async verify(args: { accessToken: string }) {
+    return this.tokenService.verifyAccessToken(args.accessToken);
+  }
+
   @Cron(CronExpression.EVERY_DAY_AT_MIDNIGHT)
   private async runCleanUpTokensTask() {
     const result = await this.tokenService.removeTokensByDate(new Date());

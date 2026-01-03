@@ -33,10 +33,10 @@ export class AuthGuard implements CanActivate {
     return true;
   }
 
-  private extractCookies(request: Request) {
-    const accessToken = request.cookies.accessToken as string | null;
-    const refreshToken = request.cookies.refreshToken as string | null;
-    const deviceId = request.cookies.id as string | null;
+  private extractCookies(request: CustomRequest) {
+    const accessToken = request.cookies.accessToken;
+    const refreshToken = request.cookies.refreshToken;
+    const deviceId = request.cookies.id;
     return { accessToken, refreshToken, deviceId };
   }
 }
