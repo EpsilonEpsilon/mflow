@@ -1,4 +1,9 @@
-import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
+import {
+  CanActivate,
+  ExecutionContext,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { IS_PUBLIC_KEY } from '../common/decorators/public.decorator';
 import { Request } from 'express';
@@ -19,17 +24,19 @@ export class AuthGuard implements CanActivate {
     if (isPublic) return true;
 
     const request = context.switchToHttp().getRequest<CustomRequest>();
-    const tokens = this.extractTokens(request);
+    const cookies = this.extractCookies(request);
+    if (!cookies.deviceId) throw new UnauthorizedException();
     request['user'] = await this.tokenService.verifyAccessToken(
-      tokens.accessToken,
+      cookies.accessToken,
     );
 
     return true;
   }
 
-  private extractTokens(request: Request) {
+  private extractCookies(request: Request) {
     const accessToken = request.cookies.accessToken as string | null;
     const refreshToken = request.cookies.refreshToken as string | null;
-    return { accessToken, refreshToken };
+    const deviceId = request.cookies.id as string | null;
+    return { accessToken, refreshToken, deviceId };
   }
 }

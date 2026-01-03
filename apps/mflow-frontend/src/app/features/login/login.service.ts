@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgFormControl } from '../../../types';
-import { AuthLoginResponse, NewUserDto } from '@repo/types';
+import { NewUserDto } from '@repo/types';
 import ValidatorService from '../../core/validator/validator.service';
 import { MessageService } from 'primeng/api';
 import LoginHttp from './login.http';

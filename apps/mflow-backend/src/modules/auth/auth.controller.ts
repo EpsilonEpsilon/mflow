@@ -31,11 +31,14 @@ class AuthController {
     @Res({ passthrough: true }) res: Response,
   ): Promise<AuthLoginResponse> {
     const userAgent = req.headers['user-agent'];
-    const { refreshToken, accessToken } = await this.authService.login(
-      body,
+    const id = req.cookies.id as string | null | undefined;
+    const deviceId = req.cookies.id as string | null;
+    const { refreshToken, accessToken } = await this.authService.login(body, {
+      id,
       ip,
       userAgent,
-    );
+      deviceId: deviceId,
+    });
 
     res.cookie(
       'refreshToken',
@@ -64,8 +67,10 @@ class AuthController {
     @Res({ passthrough: true }) res: Response,
   ): Promise<AuthRegistrationResponse> {
     const userAgent = req.headers['user-agent'];
+    const deviceId = req.cookies.id as string | null;
     const { refreshToken, accessToken } = await this.authService.registration(
       body,
+      deviceId,
       ip,
       userAgent,
     );
@@ -83,6 +88,11 @@ class AuthController {
     res.cookie('id', refreshToken.deviceId, this.getCookiesOptions());
 
     return null;
+  }
+
+  @Post('/refresh')
+  refresh() {
+    //todo: Implement validation of the refresh token and creating a new access one;
   }
 }
 

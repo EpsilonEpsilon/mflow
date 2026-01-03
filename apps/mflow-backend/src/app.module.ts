@@ -5,8 +5,8 @@ import configuration from './config/configuration';
 import AuthModule from './modules/auth/auth.module';
 import { APP_GUARD } from '@nestjs/core';
 import { AuthGuard } from './guards/auth.guard';
-import TokenService from './common/token/token.service';
 import TokenModule from './common/token/token.module';
+import { ScheduleModule } from '@nestjs/schedule';
 
 @Module({
   imports: [
@@ -27,6 +27,7 @@ import TokenModule from './common/token/token.module';
     }),
     AuthModule,
     TokenModule,
+    ScheduleModule.forRoot(),
   ],
   controllers: [],
   providers: [{ provide: APP_GUARD, useClass: AuthGuard }],

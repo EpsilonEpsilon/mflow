@@ -1,5 +1,5 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
-import { EntityManager, Repository } from 'typeorm';
+import { EntityManager, LessThan, Repository } from 'typeorm';
 import { RefreshToken } from './entitites/refresh-token.enetity';
 import {
   AccessTokenPayload,
@@ -29,9 +29,17 @@ class TokenService {
     private userService: UsersService,
   ) {}
 
+  public removeTokensByDeviceId(id: string, manager?: EntityManager) {
+    const refreshTokenRepository = manager
+      ? manager.getRepository(RefreshToken)
+      : this.refreshTokenRepository;
+    return refreshTokenRepository.delete({ deviceId: id });
+  }
+
   public async createRefreshToken(
     payload: RefreshTokenPayload,
     user?: User,
+    deviceId?: string,
     manager?: EntityManager,
   ): Promise<RefreshTokenObject> {
     const refreshTokenRepository = manager
@@ -40,7 +48,6 @@ class TokenService {
     const expireIn = this.configService.get<StringValue>(
       'jwt.refresh.expiresIn',
     );
-
     const token = await this.jwtService.signAsync<RefreshTokenPayload>(
       payload,
       {
@@ -51,17 +58,20 @@ class TokenService {
     const hash = await this.encryptionService.hash(token);
     const _user =
       user ?? (await this.userService.findOneByUsername(token, manager));
-    const deviceId = nanoid();
+    const _deviceId = deviceId || nanoid();
+    const expiresIn = addMilliseconds(new Date(), ms(expireIn));
     await refreshTokenRepository.save({
       tokenHash: hash,
       ...payload,
       user: _user,
-      deviceId,
+      deviceId: _deviceId,
+      expiresAt: expiresIn,
     });
+
     return {
       token,
       expiresIn: addMilliseconds(new Date(), ms(expireIn)),
-      deviceId,
+      deviceId: _deviceId,
     };
   }
 
@@ -108,6 +118,10 @@ class TokenService {
     } catch {
       throw new UnauthorizedException();
     }
+  }
+
+  public removeTokensByDate(date: Date) {
+    return this.refreshTokenRepository.delete({ expiresAt: LessThan(date) });
   }
 }
 
