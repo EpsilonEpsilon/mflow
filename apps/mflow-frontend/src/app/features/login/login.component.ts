@@ -8,7 +8,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import LoginService from './login.service';
 import { ToastModule } from 'primeng/toast';
-import { MessageService } from 'primeng/api';
 import LoginHttp from './login.http';
 
 @Component({

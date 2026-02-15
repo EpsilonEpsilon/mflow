@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-home',
+  selector: 'dashboard-home',
   standalone: true,
   template: `<div>MFlow Home Page</div>`,
 })
-class HomeComponent {}
+class DashboardComponent {}
 
-export default HomeComponent;
+export default DashboardComponent;

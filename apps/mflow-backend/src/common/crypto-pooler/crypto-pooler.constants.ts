@@ -1,0 +1,1 @@
+export const CRYPTO_POOLER_SERVICE = Symbol('CRYPTO_POOLER_SERVICE');

@@ -1,0 +1,7 @@
+<div class="sidebar">
+  <ul class="list">
+    @for (item of menu; track item.name) {
+      <li app-menu-item [item]="item"></li>
+    }
+  </ul>
+</div>
