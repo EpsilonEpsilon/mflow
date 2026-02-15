@@ -39,7 +39,6 @@ class TokenService {
   public async createRefreshToken(
     payload: RefreshTokenPayload,
     user?: User,
-    deviceId?: string,
     manager?: EntityManager,
   ): Promise<RefreshTokenObject> {
     const refreshTokenRepository = manager
@@ -58,20 +57,20 @@ class TokenService {
     const hash = await this.encryptionService.hash(token);
     const _user =
       user ?? (await this.userService.findOneByUsername(token, manager));
-    const _deviceId = deviceId || nanoid();
     const expiresIn = addMilliseconds(new Date(), ms(expireIn));
+    const deviceId = nanoid();
     await refreshTokenRepository.save({
       tokenHash: hash,
       ...payload,
       user: _user,
-      deviceId: _deviceId,
+      deviceId,
       expiresAt: expiresIn,
     });
 
     return {
       token,
       expiresIn: addMilliseconds(new Date(), ms(expireIn)),
-      deviceId: _deviceId,
+      deviceId,
     };
   }
 

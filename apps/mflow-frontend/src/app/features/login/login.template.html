@@ -10,7 +10,7 @@
 
           <form
             [formGroup]="loginService.loginForm"
-            (ngSubmit)="loginService.onSubmit()"
+            (ngSubmit)="loginService.onSubmit($event)"
             class="login-form"
           >
             <label for="username" class="form-label">Username</label>
@@ -37,7 +37,6 @@
               class="submit-button"
               styleClass="w-full"
               label="Sign In"
-              routerLink="/"
               [disabled]="this.loginService.loginForm.invalid"
             ></p-button>
           </form>
@@ -45,5 +44,4 @@
       </div>
     </div>
   </div>
-  <p-toast />
 </ng-container>

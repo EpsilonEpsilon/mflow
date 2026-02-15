@@ -12,7 +12,7 @@ class BaseApiService {
     'Content-Type': 'application/json',
   };
 
-  protected post<T>(url: string, body: unknown) {
+  protected post<T>(url: string, body?: unknown) {
     return this.http.post(this.buildUrl(url), body, {
       headers: this.headers,
       withCredentials: true,

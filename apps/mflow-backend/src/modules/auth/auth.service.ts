@@ -11,6 +11,7 @@ import { User } from '../../common/users/entitites/user.entitity';
 import { DataSource, EntityManager } from 'typeorm';
 import { LoginDto, NewUserDto } from '@repo/types';
 import { Cron, CronExpression } from '@nestjs/schedule';
+import { AuthTokenMeta, LoginMeta, RegistrationMeta } from './types';
 
 @Injectable()
 class AuthService implements OnModuleInit {
@@ -27,42 +28,32 @@ class AuthService implements OnModuleInit {
   }
 
   private async createAuthTokens(
-    data: {
-      user: User;
-      ip?: string;
-      userAgent?: string;
-    },
-    deviceId?: string,
+    user: User,
+    meta: AuthTokenMeta,
     manager?: EntityManager,
   ) {
     const refreshToken = await this.tokenService.createRefreshToken(
       {
-        sub: data.user.id,
-        ip: data.ip,
-        userAgent: data.userAgent,
-        username: data.user.username,
+        sub: user.id,
+        ip: meta.ip,
+        userAgent: meta.userAgent,
+        username: user.username,
       },
-      data.user,
-      deviceId,
+      user,
       manager,
     );
     const accessToken = await this.tokenService.createAccessToken(
       refreshToken.token,
       {
-        sub: data.user.id,
-        username: data.user.username,
+        sub: user.id,
+        username: user.username,
       },
     );
 
     return { refreshToken, accessToken, deviceId: refreshToken.deviceId };
   }
 
-  public async registration(
-    data: NewUserDto,
-    deviceId?: string | null,
-    ip?: string,
-    userAgent?: string,
-  ) {
+  public async registration(data: NewUserDto, meta: RegistrationMeta) {
     const queryRunner = this.dataSource.createQueryRunner();
     await queryRunner.connect();
     await queryRunner.startTransaction();
@@ -78,18 +69,14 @@ class AuthService implements OnModuleInit {
         },
         queryRunner.manager,
       );
-      if (deviceId)
+      if (meta.deviceId)
         await this.tokenService.removeTokensByDeviceId(
-          deviceId,
+          meta.deviceId,
           queryRunner.manager,
         );
       const tokens = await this.createAuthTokens(
-        {
-          user: userRecord,
-          ip,
-          userAgent,
-        },
-        deviceId,
+        userRecord,
+        meta,
         queryRunner.manager,
       );
       await queryRunner.commitTransaction();
@@ -102,15 +89,7 @@ class AuthService implements OnModuleInit {
     }
   }
 
-  public async login(
-    data: LoginDto,
-    args: {
-      id?: string | null;
-      ip?: string;
-      deviceId?: string;
-      userAgent?: string;
-    },
-  ) {
+  public async login(data: LoginDto, meta: LoginMeta) {
     const user = await this.userService.findOneByUsername(data.username);
     if (!user) throw new BadRequestException('User is not exist');
     const isPasswordsEqual = await this.encryptionService.compare(
@@ -118,15 +97,13 @@ class AuthService implements OnModuleInit {
       user.hashPassword,
     );
     if (!isPasswordsEqual) throw new BadRequestException('User is not exist');
-    if (args.id) await this.tokenService.removeTokensByDeviceId(args.id);
-    return this.createAuthTokens(
-      {
-        user,
-        ip: args.ip,
-        userAgent: args.userAgent,
-      },
-      args.deviceId,
-    );
+    if (meta.deviceId)
+      await this.tokenService.removeTokensByDeviceId(meta.deviceId);
+    return this.createAuthTokens(user, {
+      deviceId: meta.deviceId,
+      ip: meta.ip,
+      userAgent: meta.userAgent,
+    });
   }
 
   public async verify(args: { accessToken: string }) {
